@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so" >
+    <robotNamespace>/servo</robotNamespace>
+    <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    <legacyModeNS>true</legacyModeNS>
+    </plugin>
+  </gazebo>
+
+  <!-- Gazebo reference for servo motor links -->
+  <gazebo reference="u0" >
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <dampingFactor>0.01</dampingFactor>
+    <minDepth>0.003</minDepth>  
+    <material>Gazebo/Black</material>
+  </gazebo>
+  
+  <gazebo reference="u1" >
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <dampingFactor>0.01</dampingFactor>
+    <minDepth>0.003</minDepth>  
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="u2" >
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <dampingFactor>0.01</dampingFactor>
+    <minDepth>0.003</minDepth>  
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="u3" >
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <dampingFactor>0.01</dampingFactor>
+    <minDepth>0.003</minDepth>  
+    <material>Gazebo/Black</material>
+  </gazebo>
+  
+  <gazebo reference="h0" >
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <dampingFactor>0.01</dampingFactor>
+    <minDepth>0.003</minDepth>  
+    <material>Gazebo/White</material>
+  </gazebo>
+  
+  <gazebo reference="h1" >
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <dampingFactor>0.01</dampingFactor>
+    <minDepth>0.003</minDepth>  
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+
+  <!--Gazebo reference for the motor joint-->
+  <gazebo reference="joint1" >
+    <stopCfm>0.0</stopCfm>
+    <stopErp>1.0</stopErp>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  
+  <gazebo reference="joint2" >
+    <stopCfm>0.0</stopCfm>
+    <stopErp>1.0</stopErp>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  
+</robot>
+

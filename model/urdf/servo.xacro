@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+<robot name="servo" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+  <!--Constant for the servo.xacro-->
+  <xacro:property name="jnt_friction" value="0.015"/>
+  <xacro:property name="jnt_damping" value="0.03"/>
+  <xacro:property name="eff_lim" value="2.0"/>
+  <xacro:property name="vel_lim" value="${pi}"/>
+
+
+  <xacro:property name="lx_u0" value="0.02"/>
+  <xacro:property name="ly_u0" value="0.04"/>
+  <xacro:property name="lz_u0" value="0.01"/>
+
+  <xacro:property name="lx_u1" value="0.02"/>
+  <xacro:property name="ly_u1" value="0.04"/>
+  <xacro:property name="lz_u1" value="0.017"/>
+
+  <xacro:property name="lx_u2" value="0.02"/>
+  <xacro:property name="ly_u2" value="0.055"/>
+  <xacro:property name="lz_u2" value="0.003"/>
+
+  <xacro:property name="lx_u3" value="0.02"/>
+  <xacro:property name="ly_u3" value="0.04"/>
+  <xacro:property name="lz_u3" value="0.01"/>
+  
+  <xacro:property name="lx_h0" value="0.012"/>
+  <xacro:property name="ly_h0" value="0.03"/>
+  <xacro:property name="lz_h0" value="0.005"/>
+ 
+  <xacro:property name="lx_h1" value="0.02"/>
+  <xacro:property name="ly_h1" value="0.02"/>
+  <xacro:property name="lz_h1" value="0.02"/>
+  
+  
+  <xacro:include filename="$(find ds3218_sim)/model/urdf/servo.gazebo" />
+  <xacro:include filename="$(find ds3218_sim)/model/urdf/utilities.xacro"/>
+  <xacro:include filename="$(find ds3218_sim)/model/materials/materials.xacro"/>
+  <!--the fixed world link-->
+  <link name="world"/>
+  <!--the fixed link from world to servo iteself-->
+  <joint name="world_to_u0" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="world" />
+    <child link="u0" />
+  </joint>
+
+  <link name="u0" >
+    <visual>
+      <origin xyz="0 0 ${lz_u0/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_u0} ${ly_u0} ${lz_u0}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 ${lz_u0/2}" rpy="0 0 0"/>
+      <xacro:box_inertia  lenx="${lx_u0}" leny="${ly_u0}" lenz="${lz_u0}" />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 ${lz_u0/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_u0} ${ly_u0} ${lz_u0}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="fix_1" type="fixed" >
+    <parent link="u0"/>
+    <child link="u1"/>
+    <origin xyz="0 0 ${lz_u0}"/>
+    <axis xyz="0 0 1"/>  
+  </joint>
+  
+  <link name="u1" >
+    <visual>
+      <origin xyz="0 0 ${lz_u1/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_u1} ${ly_u1} ${lz_u1}"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 ${lz_u1/2}" rpy="0 0 0"/>
+      <xacro:box_inertia  lenx="${lx_u1}" leny="${ly_u1}" lenz="${lz_u1}" />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 ${lz_u1/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_u1} ${ly_u1} ${lz_u1}"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="fix_2" type="fixed" >
+    <parent link="u1"/>
+    <child link="u2"/>
+    <origin xyz="0 0 ${lz_u1}"/>
+    <axis xyz="0 0 1"/>  
+  </joint>
+  
+  <link name="u2" >
+    <visual>
+      <origin xyz="0 0 ${lz_u2/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_u2} ${ly_u2} ${lz_u2}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 ${lz_u2/2}" rpy="0 0 0"/>
+      <xacro:box_inertia  lenx="${lx_u2}" leny="${ly_u2}" lenz="${lz_u2}" />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 ${lz_u2/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_u2} ${ly_u2} ${lz_u2}"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="fix_3" type="fixed" >
+    <parent link="u2"/>
+    <child link="u3"/>
+    <origin xyz="0 0 ${lz_u2}"/>
+    <axis xyz="0 0 1"/>  
+  </joint>
+  
+  <link name="u3" >
+    <visual>
+      <origin xyz="0 0 ${lz_u3/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_u3} ${ly_u3} ${lz_u3}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 ${lz_u3/2}" rpy="0 0 0"/>
+      <xacro:box_inertia  lenx="${lx_u3}" leny="${ly_u3}" lenz="${lz_u3}" />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 ${lz_u3/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_u3} ${ly_u3} ${lz_u3}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!--define the joint1 -->
+  <joint name="joint1" type="revolute" >
+    <parent link="u3"/>
+    <child link="h0"/>
+    <origin xyz= "0 ${ly_u3/4} ${lz_u3}"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="${jnt_damping}" friction="${jnt_friction}"/>
+    <limit effort="${eff_lim}" velocity="${vel_lim}" lower="${-2*pi/4}" upper="${2*pi/4}" />
+    <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-1.56" soft_upper_limit="1.56" />
+  </joint>
+  
+  <transmission name="joint1_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint1_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <link name="h0" >
+    <visual>
+      <origin xyz="0 ${ly_h0/2-lx_h0/2} ${lz_h0/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_h0} ${ly_h0} ${lz_h0}"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 ${ly_h0/2-lx_h0/2} ${lz_h0/2}" rpy="0 0 0"/>
+      <xacro:box_inertia  lenx="${lx_h0}" leny="${ly_h0}" lenz="${lz_h0}" />
+    </inertial>
+    <collision>
+      <origin xyz="0 ${ly_h0/2-lx_h0/2} ${lz_h0/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_h0} ${ly_h0} ${lz_h0}"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <!--define the joint2 for changing the inertia of the rotating link-->
+  <joint name="joint2" type="prismatic" >
+    <parent link="h0"/>
+    <child link="h1"/>
+    <origin xyz="0 0 ${lz_h0}"/>
+    <axis xyz="0 1 0"/>  
+    <dynamics damping="0.7" friction="0.03"/>
+    <limit effort="${eff_lim}" velocity="${vel_lim}" lower="${-ly_h0}" upper="${ly_h1}" />
+  </joint>
+  <transmission name="joint2_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint2_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <link name="h1" >
+    <visual>
+      <origin xyz="0 ${ly_h0-lx_h1/2} ${lz_h1/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_h1} ${ly_h1} ${lz_h1}"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 ${ly_h0-lx_h1/2} ${lz_h1/2}" rpy="0 0 0"/>
+      <xacro:box_inertia  lenx="${lx_h1}" leny="${ly_h1}" lenz="${lz_h1}" />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 ${lz_h1/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${lx_h1} ${ly_h1} ${lz_h1}"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+
+</robot>
+

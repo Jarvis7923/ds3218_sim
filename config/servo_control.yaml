@@ -1,0 +1,33 @@
+servo:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  # Position Controllers ---------------------------------------
+  joint1_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint1
+    pid: {p: 1.0, i: 0.0, d: 0.0}
+  
+  joint2_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint2
+    pid: {p: 1.0, i: 0.0, d: 0.0}
+  
+  joint_limit:
+    joint1:
+      has_position_limits: true
+      min_position: -1.57
+      max_position: 1.57
+      has_velocity_limits: true
+      max_velocity: 3.0
+      has_acceleration_limits: true
+      max_acceleration: 3.0
+      has_jerk_limits: true
+      max_jerk: 100.0
+      has_effort_limits: true
+      max_effort: 2.0
+    
+  
+      
